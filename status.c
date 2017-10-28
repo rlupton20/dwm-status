@@ -296,10 +296,10 @@ get_temperatures(int16_t *temperatures)
 void
 log_source_information()
 {
-    #if SHOW_BATTERY_INFO == 1
+    #if SHOW_BATTERY_INFO != 0
     INFO("Reading battery details from %s", BATTERY_PATH);
     #endif
-    #if SHOW_TEMPERATURE_SENSORS == 1
+    #if SHOW_TEMPERATURE_SENSORS != 0
     for (int i = 0; i < num_sensors; ++i)
 	INFO("Reading temperature information for %s from %s%s",
 	    temperature_sensors[i].name,

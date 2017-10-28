@@ -1,0 +1,17 @@
+#+TITLE: dwm-status
+
+A custom C program which provides information on the time/date, remaining battery power, and temperatures (via =lm-sensors=) periodically to =stdout=. This is intended to be used with =dwm= to provide and informative, lightweight and basic status bar.
+
+* Building
+
+GNU autotools is enough to build the executable. Just run =make=.
+
+* Usage with dwm
+
+#+begin_src shell
+status | xargs -I{} xsetroot -name "{}"
+#+end_src
+
+* Configuration
+
+Configuration is inline with configuration of =dwm= - edit the source and rebuild.
