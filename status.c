@@ -14,64 +14,20 @@
 #include <time.h>
 #include <unistd.h>
 
-/* Segments to show - set to 0 to disable */
-#define SHOW_TEMPERATURE_SENSORS 1
-#define SHOW_BATTERY_INFO 1
+#include "config.h"
 
 /* Turn on debug logging by defining DEBUG_MODE */
-#undef DEBUG_MODE
+/* #define DEBUG_MODE */
 
+/* Internal boundaries and settings */
 #define MAX_INTERVAL 60
-#define BATTERY_UPDATE_INTERVAL 5
-#define TEMPERATURE_UPDATE_INTERVAL 1
-#define DATE_FMT "%H:%M:%S %D"
 #define MAX_DATE_LENGTH 64
 #define DATE_ERR "Error getting date"
 
-/* Battery specific configuration parameters */
-#define BATTERY_PATH "/sys/class/power_supply/" BATTERY_ID "/"
-#define CAPACITY_FILE "capacity"
-#define POWER_USAGE_FILE "power_now"
-#define POWER_REMAINING_FILE "energy_now"
-#define BATTERY_ID "BAT0"
-
-/* Temperature sensing parameters */
-#define TEMPERATURE_SENSOR_PATH "/sys/devices/platform/coretemp.0/hwmon/hwmon2/"
-
-typedef struct sensor_t {
-  char *name;
-  char *file;
-} sensor_t;
-
-/* Names and files to use to source temperature information */
-const sensor_t temperature_sensors[] = {
-  "Core 1", "temp2_input",
-  "Core 2", "temp3_input"
-};
-
 const uint8_t num_sensors = sizeof temperature_sensors / sizeof(sensor_t);
 
-/* Simple logging macros */
-#define INFO(str, ...) fprintf(stderr, "[INFO] " str "\n", ##__VA_ARGS__)
-#define ERROR(str, ...) fprintf(stderr, "[ERROR] (%s, line %d) " str "\n", \
-				__FILE__, __LINE__, ##__VA_ARGS__)
-/* DEBUG logging is defined only when DEBUG_MODE is enabled */
-#ifdef DEBUG_MODE
-#define DEBUG(str, ...) fprintf(stderr, "[DEBUG] (%s, line %d) " str "\n", \
-				__FILE__, __LINE__, ##__VA_ARGS__)
-#else
-#define DEBUG(...)
-#endif
-
-/* Compile time check macro */
-#define IS_VALID_INTERVAL(i) \
-  static_assert(0 < (i) && (i) < MAX_INTERVAL, \
-  #i " is not a valid interval; failed 0 < " #i " && " #i " < MAX_INTERVAL")
-
-/* Compile time assertions */
-IS_VALID_INTERVAL(BATTERY_UPDATE_INTERVAL);
-IS_VALID_INTERVAL(TEMPERATURE_UPDATE_INTERVAL);
-static_assert(MAX_DATE_LENGTH > sizeof(DATE_ERR), "MAX_DATE_LENGTH too small");
+#include "logging.h"
+#include "compile_checks.h"
 
 /* Program structures */
 typedef struct hours_and_minutes_t {

@@ -4,7 +4,7 @@ A custom C program which provides information on the time/date, remaining batter
 
 * Building
 
-GNU autotools is enough to build the executable. Just run =make=.
+GNU make is enough to build the executable. Just run =make=.
 
 * Usage with dwm
 
@@ -14,4 +14,4 @@ status | xargs -I{} xsetroot -name "{}"
 
 * Configuration
 
-Configuration is inline with configuration of =dwm= - edit the source and rebuild.
+Configuration is inline with configuration of =dwm= - edit the source and rebuild. Most of the interesting configuration options can be found in =config.h=.
