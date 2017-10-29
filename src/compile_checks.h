@@ -2,9 +2,10 @@
 #define _COMPILE_CHECKS_H
 
 /* Compile time check macro */
-#define IS_VALID_INTERVAL(i) \
-  static_assert(0 < (i) && (i) < MAX_INTERVAL, \
-  #i " is not a valid interval; failed 0 < " #i " && " #i " < MAX_INTERVAL")
+#define IS_VALID_INTERVAL(i)                                                   \
+    static_assert(0 < (i) && (i) < MAX_INTERVAL,                               \
+                  #i " is not a valid interval; failed 0 < " #i " && " #i      \
+                     " < MAX_INTERVAL")
 
 /* Compile time assertions */
 IS_VALID_INTERVAL(BATTERY_UPDATE_INTERVAL);

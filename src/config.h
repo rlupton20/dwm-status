@@ -21,14 +21,12 @@
 #define TEMPERATURE_SENSOR_PATH "/sys/devices/platform/coretemp.0/hwmon/hwmon2/"
 
 typedef struct sensor_t {
-  char *name;
-  char *file;
+    char *name;
+    char *file;
 } sensor_t;
 
 /* Names and files to use to source temperature information */
-const sensor_t temperature_sensors[] = {
-  "Core 1", "temp2_input",
-  "Core 2", "temp3_input"
-};
+const sensor_t temperature_sensors[] = {{"Core 1", "temp2_input"},
+                                        {"Core 2", "temp3_input"}};
 
 #endif
