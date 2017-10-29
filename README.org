@@ -4,7 +4,11 @@ A custom C program which provides information on the time/date, remaining batter
 
 * Building
 
-GNU make is enough to build the executable. Just run =make=.
+CMake is used for the builds. To build on a unix type system run
+
+#+begin_src shell
+cmake -G "Unix Makefiles" path_to_CMakeLists.txt && make
+#+end_src
 
 * Usage with dwm
 
