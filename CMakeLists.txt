@@ -1,5 +1,5 @@
-cmake_minimum_required (VERSION 3.7)
-project (dwm-status)
+cmake_minimum_required (VERSION 3.6)
+project (dwm-status C)
 # Set versions
 set (dwm_status_VERSION_MAJOR 0)
 set (dwm_status_VERSION_MINOR 1.1)
