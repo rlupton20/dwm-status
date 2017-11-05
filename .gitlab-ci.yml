@@ -1,0 +1,14 @@
+image: debian:stable
+
+stages:
+  - build
+
+before_script:
+  - apt-get -y update
+  - apt-get -y install cmake
+
+build:
+  stage: build
+  script:
+    - cmake -G "Unix Makefiles" .
+    - make
